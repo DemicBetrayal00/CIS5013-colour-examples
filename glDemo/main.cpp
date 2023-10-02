@@ -33,6 +33,9 @@ void drawStarOutline();
 void drawStarShaded();
 void drawTank();
 void drawSemiCircleStudio();
+void drawOctagon();
+void drawScales();
+void drawL();
 
 void resizeWindow(GLFWwindow* window, int width, int height);
 void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -121,7 +124,10 @@ void renderScene()
 	//drawStarOutline();
 	//drawStarShaded();
 	//drawTank();
-	drawSemiCircleStudio();
+	//drawSemiCircleStudio();
+	//drawOctagon();
+	//drawScales();
+	drawL();
 }
 
 // Rendering functions
@@ -278,6 +284,111 @@ void drawSemiCircleStudio() {
 
 	glEnd();
 }
+
+void drawOctagon()
+{
+	
+
+	const float pi = 3.141593;
+	const float thetaStepSize = 2.0f * pi / float(6);
+
+	glBegin(GL_TRIANGLE_FAN);
+
+	glVertex2f(0.0f, 0.0f);
+
+	for (int i = 0; i <= 6; i++)
+	{
+		float x = cosf(thetaStepSize * float(i));
+		float y = sinf(thetaStepSize * float(i));
+
+		glVertex2f(x, y);
+
+
+	}
+
+   glEnd();
+
+
+
+}
+
+void drawScales()
+{
+	glBegin(GL_TRIANGLES);
+
+	glColor3ub(0, 255, 0);
+	glVertex2f(-0.4f, -0.8f);
+	glVertex2f(0.0f, 0.8f );
+	glVertex2f(0.4f, -0.8f);
+
+	glVertex2f(0.0f, 0.8f );
+	glVertex2f(0.5f, 0.9f);
+	glVertex2f(0.0f, 1.0f);
+
+	glVertex2f(0.0f, 0.8f);
+	glVertex2f(-0.5f , 0.9f);
+	glVertex2f(0.0f, 1.0f);
+
+	glEnd();
+
+	glBegin(GL_LINE_STRIP);
+
+	glVertex2f(0.4f, 0.4f);
+	glVertex2f(0.5f, 0.9f);
+	glVertex2f(0.6f, 0.4f);
+
+	glEnd();
+
+	glBegin(GL_LINE_STRIP);
+
+	glVertex2f(-0.4f, 0.4f);
+	glVertex2f(-0.5f, 0.9f);
+	glVertex2f(-0.6f, 0.4f);
+
+	
+    glEnd();
+
+	glBegin(GL_QUADS);
+
+	glVertex2f(0.4f, 0.4f);
+	glVertex2f(0.6f, 0.4f);
+	glVertex2f(0.6f, 0.2f);
+	glVertex2f(0.4f, 0.2f);
+
+	glVertex2f(-0.4f, 0.4f);
+	glVertex2f(-0.6f, 0.4f);
+	glVertex2f(-0.6f, 0.2f);
+	glVertex2f(-0.4f, 0.2f);
+	
+
+	glEnd();
+}
+
+void drawL()
+{
+	glBegin(GL_TRIANGLE_STRIP);
+
+	glVertex2f(-0.4f, 0.9f);
+	glVertex2f(-0.2f, 0.9f);
+	glVertex2f(-0.4f, 0.0f);
+
+	glVertex2f(-0.2f, 0.9f);
+	glVertex2f(-0.2f, 0.0f);
+	glVertex2f(-0.2f, 0.0f);
+
+	glVertex2f(-0.2f, 0.2f);
+	glVertex2f(0.6f, 0.0f);
+	glVertex2f(-0.2f, 0.0f);
+	
+	glVertex
+	
+
+	
+
+	glEnd();
+
+}
+
 
 
 // Function to call when window resized
