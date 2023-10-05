@@ -1,8 +1,17 @@
 
 #include "core.h"
+using namespace std;
 
 
 // global variables
+
+mt19937 engine;
+uniform_real_distribution<float> range;
+
+vector<glm::vec2> vertexCoords;
+
+
+
 
 // Window size
 const unsigned int initWidth = 512;
@@ -89,6 +98,20 @@ int main() {
 	// *** setup viewplane to the appropriate size
 	gluOrtho2D(-1.1f, 1.1f, -1.1f, 1.1f);
 
+	random_device rd;
+	engine = mt19937(rd());
+	range = uniform_real_distribution<float>(-1.0f, 1.0f);
+
+	vertexCoords = vector<glm::vec2>(100, glm::vec2(0.0f, 0.0f));
+
+	for (int i = 0; i < 100; i++)
+	{
+		float x = range(engine);
+		float y = range(engine);
+
+		vertexCoords[i] = glm::vec2(x, y);
+	}
+
 	//
 	// 2. Main loop
 	// 
@@ -116,9 +139,20 @@ int main() {
 // renderScene - function to render the current scene
 void renderScene()
 {
+
 	// Clear the rendering window
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glPointSize(5.0f);
+	glColor3ub(0, 180, 0);
+
+	glBegin(GL_POINTS);
+
+	for (int i = 0; i < 100; i++) {
+		
+		glVertex2f(vertexCoords[i].x, vertexCoords[i].y);
+	}
+	glEnd();
 	// Render objects here...
 	//drawShadedTriangle();
 	//drawStarOutline();
@@ -126,8 +160,8 @@ void renderScene()
 	//drawTank();
 	//drawSemiCircleStudio();
 	//drawOctagon();
-	//drawScales();
-	drawL();
+	drawScales();
+	//drawL();
 }
 
 // Rendering functions
@@ -331,7 +365,7 @@ void drawScales()
 
 	glEnd();
 
-	glBegin(GL_LINE_STRIP);
+	glBegin(GL_LINE_LOOP);
 
 	glVertex2f(0.4f, 0.4f);
 	glVertex2f(0.5f, 0.9f);
@@ -339,7 +373,7 @@ void drawScales()
 
 	glEnd();
 
-	glBegin(GL_LINE_STRIP);
+	glBegin(GL_LINE_LOOP);
 
 	glVertex2f(-0.4f, 0.4f);
 	glVertex2f(-0.5f, 0.9f);
@@ -380,7 +414,7 @@ void drawL()
 	glVertex2f(0.6f, 0.0f);
 	glVertex2f(-0.2f, 0.0f);
 	
-	glVertex
+	
 	
 
 	
